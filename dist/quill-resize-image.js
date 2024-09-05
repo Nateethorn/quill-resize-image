@@ -153,6 +153,7 @@
                 this.resizer.addEventListener("click", this.toolbarClick);
                 this.resizer.addEventListener("change", this.toolbarInputChange);
                 this.resizer.addEventListener("keydown", function (e) {
+                    console.log("code", e.code);
                     if (e.code === "Enter") { //checks whether the pressed key is "Enter"
                         e.preventDefault();
                     }
@@ -186,6 +187,7 @@
                 this._setStylesForToolbar(type, "width: " + Number(value) + "%;");
             }
             // ตรวจจับการกดปุ่ม Enter
+            console.log("ekey", e.key);
             if (e.key === 'Enter') {
                 e.preventDefault(); // ป้องกันการ submit form
             }
