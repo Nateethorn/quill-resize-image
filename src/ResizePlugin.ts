@@ -110,6 +110,7 @@ class ResizePlugin {
       this.resizer.addEventListener("click", this.toolbarClick);
       this.resizer.addEventListener("change", this.toolbarInputChange);
       this.resizer.addEventListener("keydown", (e) => {
+        console.log("code", e.code);
         if (e.code === "Enter") {  //checks whether the pressed key is "Enter"
           e.preventDefault();
         }
@@ -139,6 +140,7 @@ class ResizePlugin {
     const type = target?.dataset?.type;
     const value = target.value;
 
+    console.log("key", (e as KeyboardEvent).key );
     // ตรวจจับการกดปุ่ม Enter
     if ((e as KeyboardEvent).key === 'Enter') {
       e.preventDefault(); // ป้องกันการ submit form
