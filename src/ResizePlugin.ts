@@ -109,6 +109,11 @@ class ResizePlugin {
       this.resizer.addEventListener("mousedown", this.startResize);
       this.resizer.addEventListener("click", this.toolbarClick);
       this.resizer.addEventListener("change", this.toolbarInputChange);
+      this.resizer.addEventListener("keydown", (e) => {
+        if (e.code === "Enter") {  //checks whether the pressed key is "Enter"
+          e.preventDefault();
+        }
+      });
     }
     window.addEventListener("mouseup", this.endResize);
     window.addEventListener("mousemove", this.resizing);
