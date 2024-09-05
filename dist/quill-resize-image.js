@@ -103,7 +103,7 @@
         }
         return ResizeElement;
     }(HTMLElement));
-    var template = "\n<div class=\"handler\" title=\"{0}\"></div>\n<div class=\"toolbar\">\n  <div class=\"group\">\n    <a class=\"btn\" data-type=\"width\" data-styles=\"width:100%\">100%</a>\n    <a class=\"btn\" data-type=\"width\" data-styles=\"width:50%\">50%</a>\n    <span class=\"input-wrapper\"><input data-type=\"width\" maxlength=\"3\" /><span class=\"suffix\">%</span><span class=\"tooltip\">{5}</span></span>\n    <a class=\"btn\" data-type=\"width\" data-styles=\"width:auto\">{4}</a>\n  </div>\n  <div class=\"group\">\n    <a class=\"btn\" data-type=\"align\" data-styles=\"float:left\">{1}</a>\n    <a class=\"btn\" data-type=\"align\" data-styles=\"display:block;margin:auto;\">{2}</a>\n    <a class=\"btn\" data-type=\"align\" data-styles=\"float:right;\">{3}</a>\n    <a class=\"btn\" data-type=\"align\" data-styles=\"\">{4}</a>\n  </div>\n</div>\n";
+    var template = "\n<div class=\"handler\" title=\"{0}\"></div>\n<div class=\"toolbar\">\n  <div class=\"group\">\n    <a class=\"btn\" data-type=\"width\" data-styles=\"width:100%\">80%</a>\n    <a class=\"btn\" data-type=\"width\" data-styles=\"width:50%\">50%</a>\n    <span class=\"input-wrapper\"><input data-type=\"width\" maxlength=\"3\" /><span class=\"suffix\">%</span><span class=\"tooltip\">{5}</span></span>\n    <a class=\"btn\" data-type=\"width\" data-styles=\"width:auto\">{4}</a>\n  </div>\n  <div class=\"group\">\n    <a class=\"btn\" data-type=\"align\" data-styles=\"float:left\">{1}</a>\n    <a class=\"btn\" data-type=\"align\" data-styles=\"display:block;margin:auto;\">{2}</a>\n    <a class=\"btn\" data-type=\"align\" data-styles=\"float:right;\">{3}</a>\n    <a class=\"btn\" data-type=\"align\" data-styles=\"\">{4}</a>\n  </div>\n</div>\n";
     var ResizePlugin = /** @class */ (function () {
         function ResizePlugin(resizeTarget, container, editor, options) {
             this.resizer = null;
@@ -152,6 +152,11 @@
                 this.resizer.addEventListener("mousedown", this.startResize);
                 this.resizer.addEventListener("click", this.toolbarClick);
                 this.resizer.addEventListener("change", this.toolbarInputChange);
+                this.resizer.addEventListener("keydown", function (e) {
+                    if (e.code === "Enter") { //checks whether the pressed key is "Enter"
+                        e.preventDefault();
+                    }
+                });
             }
             window.addEventListener("mouseup", this.endResize);
             window.addEventListener("mousemove", this.resizing);
@@ -179,6 +184,10 @@
             var value = target.value;
             if (type && Number(value)) {
                 this._setStylesForToolbar(type, "width: " + Number(value) + "%;");
+            }
+            // ตรวจจับการกดปุ่ม Enter
+            if (e.key === 'Enter') {
+                e.preventDefault(); // ป้องกันการ submit form
             }
         };
         ResizePlugin.prototype.toolbarClick = function (e) {
