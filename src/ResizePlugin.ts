@@ -25,7 +25,7 @@ const template = `
 <div class="handler" title="{0}"></div>
 <div class="toolbar">
   <div class="group">
-    <a class="btn" data-type="width" data-styles="width:100%">80%</a>
+    <a class="btn" data-type="width" data-styles="width:100%">100%</a>
     <a class="btn" data-type="width" data-styles="width:50%">50%</a>
     <span class="input-wrapper"><input data-type="width" maxlength="3" /><span class="suffix">%</span><span class="tooltip">{5}</span></span>
     <a class="btn" data-type="width" data-styles="width:auto">{4}</a>
@@ -110,6 +110,7 @@ class ResizePlugin {
       this.resizer.addEventListener("click", this.toolbarClick);
       this.resizer.addEventListener("change", this.toolbarInputChange);
       this.resizer.addEventListener("keydown", (e) => {
+        console.log("code", e.code);
         if (e.code === "Enter") {  //checks whether the pressed key is "Enter"
           e.preventDefault();
         }
@@ -143,6 +144,7 @@ class ResizePlugin {
       this._setStylesForToolbar(type, `width: ${Number(value)}%;`);
     }
 
+    console.log("key", (e as KeyboardEvent).key);
     // ตรวจจับการกดปุ่ม Enter
     if ((e as KeyboardEvent).key === 'Enter') {
       e.preventDefault(); // ป้องกันการ submit form
