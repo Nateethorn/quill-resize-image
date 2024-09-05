@@ -133,6 +133,12 @@ class ResizePlugin {
     const target: HTMLInputElement = e.target as HTMLInputElement;
     const type = target?.dataset?.type;
     const value = target.value;
+
+    // ตรวจจับการกดปุ่ม Enter
+    if ((e as KeyboardEvent).key === 'Enter') {
+      e.preventDefault(); // ป้องกันการ submit form
+    }
+
     if (type && Number(value)) {
       this._setStylesForToolbar(type, `width: ${Number(value)}%;`);
     }
